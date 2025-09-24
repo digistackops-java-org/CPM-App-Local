@@ -1,0 +1,15 @@
+[Unit]
+Description=CPM Backend
+After=syslog.target
+
+[Service]
+User=ec2-user
+ExecStart=/usr/bin/java -jar /opt/cpm/backend.jar
+Restart=on-failure
+Environment=DB_HOST=YOUR_DB_PRIVATE_IP
+Environment=DB_USER=postgres
+Environment=DB_PASS=secret
+WorkingDirectory=/opt/cpm
+
+[Install]
+WantedBy=multi-user.target
