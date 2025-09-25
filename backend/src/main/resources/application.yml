@@ -6,13 +6,20 @@ spring:
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
+
   jpa:
     hibernate:
       ddl-auto: validate
     show-sql: false
+    properties:
+      hibernate:
+        default_schema: cpm_app   # 👈 ensure Hibernate creates/validates tables inside cpm_app
+
   flyway:
     enabled: true
     locations: classpath:db/migration
+    schemas: cpm_app             # 👈 where Flyway stores schema history & migrations
+    default-schema: cpm_app      # 👈 ensures Flyway uses cpm_app instead of public
 
 server:
   port: 8080
